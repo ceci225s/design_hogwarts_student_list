@@ -6,12 +6,14 @@ let studentArray = [];
 const Student = {
   firstName: "",
   lastName: "",
-  middleName: "",
-  nickName: "",
-  gender: "",
-  imgSrc: "",
   house: "",
+  gender: "",
+  blood: "",
+  status: "",
+  imgSrc: "",
 };
+
+const filter = {};
 
 const urlStudentList = "https://petlatkea.dk/2021/hogwarts/students.json";
 
@@ -22,9 +24,17 @@ window.addEventListener("DOMContentLoaded", loadPage);
 function loadPage() {
   console.log("ready");
   loadJSON();
+  registerButtons();
+}
+
+function registerButtons() {
+  document
+    .querySelectorAll("[data-action='filter']")
+    .forEach((button) => button.addEventListener("click", selectFilter));
 }
 
 //**********************JSON**********************
+
 async function loadJSON() {
   console.log("loadJSON");
   const jsonData = await fetch(urlStudentList);
@@ -106,13 +116,40 @@ function displayAllStudents(student) {
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
+  clone.querySelector("[data-field=gender]").textContent = student.gender;
+  clone.querySelector("[data-field=blood]").textContent = student.blood;
+  clone.querySelector("[data-field=status]").textContent = student.status;
 
   document.querySelector("#full_student_list tbody").appendChild(clone);
 }
-
 //**********************FILTER FUNCTIONS**********************
 
-function filterGryffindor() {}
+// function selectFilter(event) {
+//   console.log(selectFilter);
+//   const filter = event.target.dataset.filter;
+// }
+
+// function filterList(filterBy) {
+//   let filteredList = studentArray;
+//   if (filterBy === "Gryffindor") {
+//     //create a filtered list of only one animal (cats)
+//     filteredList = studentArray.filter(filterGryffindor);
+//   }
+
+//   displayList(filteredList);
+// }
+
+function filterGryffindor() {
+  // return student.house === "Gryffindor";
+}
+
+// function displayList(students) {
+//   // clear the list
+//   document.querySelector("#full_student_list tbody").innerHTML = "";
+
+//   // build a new list
+//   students.forEach(displayAllStudents);
+// }
 
 function filterSlytherin() {}
 
