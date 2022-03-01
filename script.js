@@ -197,62 +197,78 @@ function removeFilter() {}
 //**********************SORT FUNCTIONS**********************
 
 function selectSort(event) {
-  const sort = event.target.dataset.sort;
-  console.log("user selected ${filter}");
-  sortList(sort);
-}
+  const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
 
-function sortList(sortBy) {
-  let sortedList = studentArray;
-
-  if (sortBy === "firstName") {
-    sortedList = studentArray.sort(sortFirstName);
-  } else if (sortBy === "lastName") {
-    sortedList = studentArray.sort(sortLastName);
-  } else if (sortBy === "house") {
-    sortedList = studentArray.sort(sortHouse);
-  } else if (sortBy === "gender") {
-    sortedList = studentArray.sort(sortGender);
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
   }
 
+  console.log("user selected ${filter}");
+  sortList(sortBy, sortDir);
+}
+
+function sortList(sortBy, sortDir) {
+  let sortedList = studentArray;
+  let direction = 1;
+
+  if (sortDir === "desc") {
+    direction = -1;
+  } else {
+    direction = 1;
+  }
+
+  // if (sortBy === "firstName") {
+  // sortedList = studentArray.sort(sortFirstName);
+  // } else if (sortBy === "lastName") {
+  //   sortedList = studentArray.sort(sortLastName);
+  // } else if (sortBy === "house") {
+  //   sortedList = studentArray.sort(sortHouse);
+  // } else if (sortBy === "gender") {
+  //   sortedList = studentArray.sort(sortGender);
+  // }
+
+  sortedList = studentArray.sort(sortFirstProperty);
+
+  function sortFirstProperty(studentA, studentB) {
+    if (studentA[sortBy] < studentB[sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
+    }
+  }
   displayList(sortedList);
 }
 
-function sortFirstName(studentA, studentB) {
-  if (studentA.firstName < studentB.firstName) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
+// function sortLastName(studentA, studentB) {
+//   if (studentA.lastName < studentB.lastName) {
+//     return -1;
+//   } else {
+//     return 1;
+//   }
+// }
 
-function sortLastName(studentA, studentB) {
-  if (studentA.lastName < studentB.lastName) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
+// function sortHouse(studentA, studentB) {
+//   if (studentA.house < studentB.house) {
+//     return -1;
+//   } else {
+//     return 1;
+//   }
+// }
 
-function sortHouse(studentA, studentB) {
-  if (studentA.house < studentB.house) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
+// function sortGender(studentA, studentB) {
+//   if (studentA.gender < studentB.gender) {
+//     return -1;
+//   } else {
+//     return 1;
+//   }
+// }
 
-function sortGender(studentA, studentB) {
-  if (studentA.gender < studentB.gender) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
+// function sortBlood() {}
 
-function sortBlood() {}
-
-function sortStatus() {}
+// function sortStatus() {}
 
 //**********************SEARCH FUNCTIONS**********************
 
