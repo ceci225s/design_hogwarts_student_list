@@ -17,6 +17,39 @@ main {
   grid-column: 2;
 }
 
+.button_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-row: 1fr;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.house {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.gender {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.blood {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.status {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.remove {
+  grid-column: 5;
+  grid-row: 1;
+}
+
 #full_student_list {
   width: 100%;
   gap: 10px;
@@ -30,40 +63,51 @@ h1 {
   font-size: 7rem;
   color: #d9a443;
   text-align: center;
+  text-shadow: 0 0 7px #f29c50;
 }
 
 p {
   color: #d9a443;
-  font-family: "Playfair Display", serif;
-  letter-spacing: 0.3rem;
+  font-family: "harryp";
+  letter-spacing: 1px;
 }
 
 /********************** TEXT **********************/
-
-#sorting {
+#sorting th {
   color: #d9a443;
-  font-family: "Playfair Display", serif;
+  font-family: "harryp";
+  padding: 1rem;
+  letter-spacing: 1px;
 }
 
-#sorting,
-tr {
+td {
   color: #d9a443;
+  font-family: "Open Sans", sans-serif;
+  border-bottom: 1px solid #d9a443;
+  padding: 1rem;
+  font-size: 0.8rem;
 }
 
 .buttons,
 p {
-  grid-column: 2;
   text-align: center;
 }
 
+p {
+  margin-bottom: 2rem;
+}
+
 .filter {
-  height: 6rem;
-  width: 6rem;
+  font-family: "Open Sans", sans-serif;
+  height: 5rem;
+  width: 5rem;
   border-radius: 100%;
   border: none;
-  background-color: #d9a443;
-  color: white;
-  margin-left: 1rem;
-  margin-left: 1rem;
-  margin-bottom: 2rem;
+  background-color: #0f1640;
+  color: #d9a443;
+  margin: 10px;
+}
+
+.filter:hover {
+  box-shadow: 0 0 10px #d9a443;
 }

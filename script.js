@@ -31,6 +31,10 @@ function registerButtons() {
   document
     .querySelectorAll("[data-action='filter']")
     .forEach((button) => button.addEventListener("click", selectFilter));
+
+  document
+    .querySelectorAll("[data-action='sort']")
+    .forEach((button) => button.addEventListener("click", selectSort));
 }
 
 //**********************JSON**********************
@@ -124,38 +128,61 @@ function displayAllStudents(student) {
 }
 //**********************FILTER FUNCTIONS**********************
 
-// function selectFilter(event) {
-//   console.log(selectFilter);
-//   const filter = event.target.dataset.filter;
-// }
-
-// function filterList(filterBy) {
-//   let filteredList = studentArray;
-//   if (filterBy === "Gryffindor") {
-//     //create a filtered list of only one animal (cats)
-//     filteredList = studentArray.filter(filterGryffindor);
-//   }
-
-//   displayList(filteredList);
-// }
-
-function filterGryffindor() {
-  // return student.house === "Gryffindor";
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  console.log("user selected ${filter}");
+  filterList(filter);
 }
 
-// function displayList(students) {
-//   // clear the list
-//   document.querySelector("#full_student_list tbody").innerHTML = "";
+function filterList(filterBy) {
+  let filteredList = studentArray;
 
-//   // build a new list
-//   students.forEach(displayAllStudents);
-// }
+  if (filterBy === "Gryffindor") {
+    filteredList = studentArray.filter(filterGryffindor);
+  } else if (filterBy === "Slytherin") {
+    filteredList = studentArray.filter(filterSlytherin);
+  } else if (filterBy === "Hufflepuff") {
+    filteredList = studentArray.filter(filterHufflepuff);
+  } else if (filterBy === "Ravenclaw") {
+    filteredList = studentArray.filter(filterRavenclaw);
+  } else if (filterBy === "Boy") {
+    filteredList = studentArray.filter(filterBoys);
+  } else if (filterBy === "Girl") {
+    filteredList = studentArray.filter(filterGirls);
+  }
 
-function filterSlytherin() {}
+  displayList(filteredList);
+}
 
-function filterHufflepuff() {}
+function filterGryffindor(student) {
+  return student.house === "Gryffindor";
+}
 
-function filterRavenclaw() {}
+function filterSlytherin(student) {
+  return student.house === "Slytherin";
+}
+
+function filterHufflepuff(student) {
+  return student.house === "Hufflepuff";
+}
+
+function filterRavenclaw(student) {
+  return student.house === "Ravenclaw";
+}
+
+function filterBoys(student) {
+  return student.gender === "Boy";
+}
+
+function filterGirls(student) {
+  return student.gender === "Girl";
+}
+
+function filterPureBlood() {}
+
+function filterHalfBlood() {}
+
+function filterMuggle() {}
 
 function filterPrefects() {}
 
@@ -165,27 +192,67 @@ function filterNonExpelled() {}
 
 function filterSquad() {}
 
-function filterBoys() {}
-
-function filterGirls() {}
-
-function filterPureBlood() {}
-
-function filterHalfBlood() {}
-
-function filterMuggle() {}
-
 function removeFilter() {}
 
 //**********************SORT FUNCTIONS**********************
 
-function sortFirstName() {}
+function selectSort(event) {
+  const sort = event.target.dataset.sort;
+  console.log("user selected ${filter}");
+  sortList(sort);
+}
 
-function sortLastName() {}
+function sortList(sortBy) {
+  let sortedList = studentArray;
 
-function sortHouse() {}
+  if (sortBy === "firstName") {
+    sortedList = studentArray.sort(sortFirstName);
+  } else if (sortBy === "lastName") {
+    sortedList = studentArray.sort(sortLastName);
+  } else if (sortBy === "house") {
+    sortedList = studentArray.sort(sortHouse);
+  } else if (sortBy === "gender") {
+    sortedList = studentArray.sort(sortGender);
+  }
 
-function sortPrefects() {}
+  displayList(sortedList);
+}
+
+function sortFirstName(studentA, studentB) {
+  if (studentA.firstName < studentB.firstName) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortLastName(studentA, studentB) {
+  if (studentA.lastName < studentB.lastName) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortHouse(studentA, studentB) {
+  if (studentA.house < studentB.house) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortGender(studentA, studentB) {
+  if (studentA.gender < studentB.gender) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortBlood() {}
+
+function sortStatus() {}
 
 //**********************SEARCH FUNCTIONS**********************
 
@@ -208,3 +275,11 @@ function hackSystem() {}
 //**********************POP-UP FUNCTIONS**********************
 
 function showStudentDetails() {}
+
+function displayList(students) {
+  // clear the list
+  document.querySelector("#full_student_list tbody").innerHTML = "";
+
+  // build a new list
+  students.forEach(displayAllStudents);
+}

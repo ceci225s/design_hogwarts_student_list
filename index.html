@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Luxurious+Script&family=Open+Sans:wght@300&display=swap"
       rel="stylesheet"
     />
 
@@ -16,65 +16,57 @@
   </head>
   <body>
     <main>
-      <h1>Howgarts Student List</h1>
+      <h1>Hogwarts Student List</h1>
 
-      <p>Filter by house:</p>
+      <div class="button_container">
+        <div class="house">
+          <p>FILTER BY HOUSE:</p>
+          <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+          <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+          <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+          <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+        </div>
 
-      <div class="buttons">
-        <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-        <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-        <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
-        <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-      </div>
+        <div class="gender">
+          <p>FILTER BY GENDER:</p>
+          <button class="filter" data-action="filter" data-filter="boys">Boys</button>
+          <button class="filter" data-action="filter" data-filter="girls">Girls</button>
+        </div>
 
-      <br />
+        <div class="blood">
+          <p>FILTER BY BLOOD:</p>
+          <button class="filter" data-action="filter" data-filter="pure_blood">Pure blood</button>
+          <button class="filter" data-action="filter" data-filter="half_blood">Half blood</button>
+          <button class="filter" data-action="filter" data-filter="muggle">Muggle</button>
+        </div>
 
-      <p>Filter by gender:</p>
+        <div class="status">
+          <p>FILTER BY STUDENT STATUS:</p>
+          <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
+          <button class="filter" data-action="filter" data-filter="non_expelled">
+            Non expelled
+          </button>
+          <button class="filter" data-action="filter" data-filter="squad">Squad</button>
+          <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
+        </div>
 
-      <div class="buttons">
-        <button class="filter" data-action="filter" data-filter="boys">Boys</button>
-        <button class="filter" data-action="filter" data-filter="girls">Girls</button>
-      </div>
-
-      <br />
-
-      <p>Filter by blood:</p>
-
-      <div class="buttons">
-        <button class="filter" data-action="filter" data-filter="pure_blood">Pure blood</button>
-        <button class="filter" data-action="filter" data-filter="half_blood">Half blood</button>
-        <button class="filter" data-action="filter" data-filter="muggle">Muggle</button>
-      </div>
-
-      <br />
-
-      <p>Filter by student-status:</p>
-
-      <div class="buttons">
-        <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
-        <button class="filter" data-action="filter" data-filter="non_expelled">Non expelled</button>
-        <button class="filter" data-action="filter" data-filter="squad">Squad</button>
-        <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
-      </div>
-
-      <br />
-
-      <p>Remove filter:</p>
-      <div class="buttons">
-        <button class="filter" data-action="filter" data-filter="remove_filter">
-          Remove filter
-        </button>
+        <div class="remove">
+          <p>REMOVE FILTER:</p>
+          <button class="filter" data-action="filter" data-filter="remove_filter">
+            Remove filter
+          </button>
+        </div>
       </div>
 
       <table id="full_student_list">
         <thead>
           <tr id="sorting">
-            <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First Name</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last Name</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="blood">Blood Type</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="status">Student Status</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="firstName">FIRST NAME</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="lastName">LAST NAME</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="house">HOUSE</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="gender">GENDER</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="blood">BLOOD TYPE</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="status">STUDENT STATUS</th>
           </tr>
         </thead>
 
