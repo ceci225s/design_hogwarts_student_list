@@ -2,22 +2,28 @@
 
 let students;
 let studentArray = [];
+let filteredStudents;
 
 const Student = {
   firstName: "",
   lastName: "",
+  middleName: "",
+  nickName: "",
+  image: "",
   house: "",
   gender: "",
-  blood: "",
-  status: "",
-  imgSrc: "",
+  bloodStatus: "",
+  inquisitorial: false,
+  expelled: false,
 };
 
-const filter = {};
+const settings = {
+  filterBy: "all",
+  sortBy: "firstName",
+  sortDir: "asc",
+};
 
-const urlStudentList = "https://petlatkea.dk/2021/hogwarts/students.json";
-
-//**********************SETUP**********************
+//********************************************START**********************
 
 window.addEventListener("DOMContentLoaded", loadPage);
 
@@ -27,92 +33,105 @@ function loadPage() {
   registerButtons();
 }
 
+//********************************************JSON**********************
+
+async function loadJSON() {
+  console.log("getJson");
+  const url = "https://petlatkea.dk/2021/hogwarts/students.json";
+  let data = await fetch(url);
+  studentArray = await data.json();
+
+  createStudents(studentArray);
+}
+
+//********************************************REGISTER BUTTONS**********************
+
 function registerButtons() {
   document
     .querySelectorAll("[data-action='filter']")
     .forEach((button) => button.addEventListener("click", selectFilter));
-
   document
     .querySelectorAll("[data-action='sort']")
     .forEach((button) => button.addEventListener("click", selectSort));
 }
 
-//**********************JSON**********************
+function createStudents(data) {
+  studentArray = data.map(prepareObject);
 
-async function loadJSON() {
-  console.log("loadJSON");
-  const jsonData = await fetch(urlStudentList);
-  students = await jsonData.json();
-  makeStudents();
-}
-
-function makeStudents() {
-  console.log("makeStudents");
-  students.forEach((elm) => {
-    const student = Object.create(Student);
-
-    // Variables for holding data and trim data for whitespace
-    let fullName = elm.fullname.trim();
-    let house = elm.house.trim();
-    let gender = elm.gender.trim();
-
-    // Firstname: take the first char and set it to upper case and set the rest to lower case.
-    student.firstName =
-      fullName.substring(0, 1).toUpperCase() +
-      fullName.substring(1, fullName.indexOf(" ")).toLowerCase();
-
-    // Lastname: take the first char in the lastname and make it upper case and the rest lower case.
-    student.lastName =
-      fullName
-        .substring(fullName.lastIndexOf(" ") + 1, fullName.lastIndexOf(" ") + 2)
-        .toUpperCase() + fullName.substring(fullName.lastIndexOf(" ") + 2).toLowerCase();
-
-    // Middlename: take the middlename and make the first char upper case and the rest lower case.
-    student.middleName =
-      fullName
-        .substring(fullName.indexOf(" "), fullName.lastIndexOf(" "))
-        .trim()
-        .substring(0, 1)
-        .toUpperCase() +
-      fullName
-        .substring(fullName.indexOf(" "), fullName.lastIndexOf(" "))
-        .trim()
-        .substring(1)
-        .toLowerCase();
-
-    // Nickname: find the nickname with "" in a if statement.
-    if (fullName.includes(`"`)) {
-      student.nickName = fullName.substring(fullName.indexOf(`"`) + 1, fullName.lastIndexOf(`"`));
-      student.middleName = "";
-    }
-
-    // Gender: first char set to upper case, rest to lower case.
-    student.gender = gender.charAt(0).toUpperCase() + gender.substring(1).toLowerCase();
-
-    // Imgsrc: find the destation and make it all to lower case.
-    student.imgSrc = `./images/${fullName.substring(0, fullName.indexOf(" ")).toLowerCase()}_.png`;
-    student.imgSrc = `./images/${
-      fullName
-        .substring(fullName.lastIndexOf(" ") + 1, fullName.lastIndexOf(" ") + 2)
-        .toLowerCase() + fullName.substring(fullName.lastIndexOf(" ") + 2).toLowerCase()
-    }_${fullName.substring(0, 1).toUpperCase().toLowerCase()}.png`;
-
-    // House: set the first char to upper case and the rest to lower case.
-    student.house = house.charAt(0).toUpperCase() + house.substring(1).toLowerCase();
-
-    studentArray.push(student);
-  });
   displayList(studentArray);
 }
 
-function displayList(studentArray) {
-  console.table(studentArray);
-  // clear the list
-  document.querySelector("#full_student_list  tbody").innerHTML = "";
+//********************************************SORTING DATA AND CORRECTING IT**********************
 
-  // build a new list
-  studentArray.forEach(displayAllStudents);
+function prepareObject(object) {
+  const student = Object.create(Student);
+
+  // ----- trim all the objects
+  let originalName = object.fullname.trim();
+  let originalHouse = object.house.trim();
+  let originalGender = object.gender.trim();
+
+  // ----- cleaning first name
+  if (originalName.includes(" ")) {
+    student.firstName = originalName.substring(originalName.indexOf(0), originalName.indexOf(" "));
+  } else {
+    student.firstName = originalName.substring(originalName.indexOf(0));
+  }
+  student.firstName =
+    student.firstName.substring(0, 1).toUpperCase() + student.firstName.substring(1).toLowerCase();
+
+  // ----- cleaning middle name
+  student.middleName = originalName.substring(
+    originalName.indexOf(" ") + 1,
+    originalName.lastIndexOf(" ")
+  );
+  student.middleName =
+    student.middleName.substring(0, 1).toUpperCase() +
+    student.middleName.substring(1).toLowerCase();
+
+  //----- cleaning nickname
+  if (originalName.includes('"')) {
+    student.middleName = undefined;
+    student.nickName = originalName.substring(
+      originalName.indexOf('"') + 1,
+      originalName.lastIndexOf('"')
+    );
+  }
+
+  // ----- cleaning last name
+  if (originalName.includes(" ")) {
+    student.lastName = originalName.substring(originalName.lastIndexOf(" ") + 1);
+    student.lastName =
+      student.lastName.substring(0, 1).toUpperCase() + student.lastName.substring(1).toLowerCase();
+  }
+
+  // ----- cleaning house
+  student.house = originalHouse;
+  student.house =
+    student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
+
+  // ----- cleaning gender
+  student.gender = originalGender;
+  student.gender =
+    student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
+
+  // ----- cleaning images
+  let studentPicture = new Image();
+  studentPicture.scr = "images/" + student.lastName + ".png";
+  student.image = studentPicture.scr;
+
+  // console.table(student);
+  return student;
 }
+
+//********************************************DISPLAYING STUDENT LIST**********************
+
+function displayList(list) {
+  document.querySelector("#full_student_list tbody").innerHTML = "";
+  list.forEach((student) => displayStudent(student));
+}
+
+//********************************************DEFINE AND APPEND THE STUDENT-OBJECTS**********************
 
 function displayAllStudents(student) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
@@ -124,35 +143,80 @@ function displayAllStudents(student) {
   clone.querySelector("[data-field=blood]").textContent = student.blood;
   clone.querySelector("[data-field=status]").textContent = student.status;
 
+  // if (student.star === true) {
+  //   clone.querySelector("[data-field=star]").textContent = "🌟";
+  // } else {
+  //   clone.querySelector("[data-field=star]").textContent = "✰";
+  // }
+
+  // document.querySelector("[data-field=star]").textContent = "✰";
+
   document.querySelector("#full_student_list tbody").appendChild(clone);
 }
-//**********************FILTER FUNCTIONS**********************
 
-function selectFilter(event) {
-  const filter = event.target.dataset.filter;
-  console.log("user selected ${filter}");
-  filterList(filter);
+//********************************************BUILDING A NEW LIST**********************
+
+function buildList() {
+  const currentList = filterList(studentArray);
+  const sortedList = sortList(currentList);
+
+  displayList(sortedList);
 }
 
-function filterList(filterBy) {
-  let filteredList = studentArray;
+//********************************************FILTERING**********************
 
-  if (filterBy === "Gryffindor") {
+function prepareData(filter) {
+  filteredStudents = studentArray.filter(filter);
+  return filteredStudents;
+}
+
+function filterList(filteredList) {
+  // let filteredList = studentArray;
+
+  if (settings.filterBy === "gryffindor") {
     filteredList = studentArray.filter(filterGryffindor);
-  } else if (filterBy === "Slytherin") {
+  } else if (settings.filterBy === "slytherin") {
     filteredList = studentArray.filter(filterSlytherin);
-  } else if (filterBy === "Hufflepuff") {
+  } else if (settings.filterBy === "hufflepuff") {
     filteredList = studentArray.filter(filterHufflepuff);
-  } else if (filterBy === "Ravenclaw") {
+  } else if (settings.filterBy === "ravenclaw") {
     filteredList = studentArray.filter(filterRavenclaw);
-  } else if (filterBy === "Boy") {
+  } else if (settings.filterBy === "boys") {
     filteredList = studentArray.filter(filterBoys);
-  } else if (filterBy === "Girl") {
+  } else if (settings.filterBy === "girls") {
     filteredList = studentArray.filter(filterGirls);
+  } else if (settings.filterBy === "pure_blood") {
+    filteredList = studentArray.filter(filterPureBlood);
+  } else if (settings.filterBy === "half_blood") {
+    filteredList = studentArray.filter(filterHalfBlood);
+  } else if (settings.filterBy === "muggle") {
+    filteredList = studentArray.filter(filterMuggle);
+  } else if (settings.filterBy === "prefects") {
+    filteredList = studentArray.filter(filterPrefects);
+  } else if (settings.filterBy === "expelled") {
+    filteredList = studentArray.filter(filterExpelled);
+  } else if (settings.filterBy === "non_expelled") {
+    filteredList = studentArray.filter(filterNonExpelled);
+  } else if (settings.filterBy === "squad") {
+    filteredList = studentArray.filter(filterSquad);
   }
 
-  displayList(filteredList);
+  return filteredList;
 }
+
+function selectFilter(userEvent) {
+  const filter = userEvent.target.dataset.filter;
+  console.log(`I have selected ${filter}`);
+  setFilter(filter);
+}
+
+function setFilter(filter) {
+  settings.filterBy = filter;
+  buildList();
+  console.log(`Chosen filter: ${filter}`);
+}
+
+//********************************************FILTER FUNCTIONS**********************
 
 function filterGryffindor(student) {
   return student.house === "Gryffindor";
@@ -178,19 +242,33 @@ function filterGirls(student) {
   return student.gender === "Girl";
 }
 
-function filterPureBlood() {}
+function filterPureBlood(student) {
+  return student.gender === "Pure blood";
+}
 
-function filterHalfBlood() {}
+function filterHalfBlood(student) {
+  return student.gender === "Half blood";
+}
 
-function filterMuggle() {}
+function filterMuggle(student) {
+  return student.gender === "Muggle";
+}
 
-function filterPrefects() {}
+function filterPrefects(student) {
+  return student.gender === "Prefects";
+}
 
-function filterExpelled() {}
+function filterExpelled(student) {
+  return student.gender === "Expelled";
+}
 
-function filterNonExpelled() {}
+function filterNonExpelled(student) {
+  return student.gender === "Non expelled";
+}
 
-function filterSquad() {}
+function filterSquad(student) {
+  return student.gender === "Squad";
+}
 
 function removeFilter() {}
 
@@ -207,17 +285,24 @@ function selectSort(event) {
   }
 
   console.log("user selected ${filter}");
-  sortList(sortBy, sortDir);
+  setSort(sortBy, sortDir);
 }
 
-function sortList(sortBy, sortDir) {
-  let sortedList = studentArray;
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+
+  buildList();
+}
+
+function sortList(sortedList) {
+  // let sortedList = studentArray;
   let direction = 1;
 
-  if (sortDir === "desc") {
+  if (settings.sortDir === "desc") {
     direction = -1;
   } else {
-    direction = 1;
+    settings.direction = 1;
   }
 
   // if (sortBy === "firstName") {
@@ -230,16 +315,16 @@ function sortList(sortBy, sortDir) {
   //   sortedList = studentArray.sort(sortGender);
   // }
 
-  sortedList = studentArray.sort(sortFirstProperty);
+  sortedList = sortedList.sort(sortByProperty);
 
-  function sortFirstProperty(studentA, studentB) {
-    if (studentA[sortBy] < studentB[sortBy]) {
+  function sortByProperty(studentA, studentB) {
+    if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
       return -1 * direction;
     } else {
       return 1 * direction;
     }
   }
-  displayList(sortedList);
+  return sortedList;
 }
 
 // function sortLastName(studentA, studentB) {
