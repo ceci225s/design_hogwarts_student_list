@@ -58,7 +58,7 @@ function registerButtons() {
 function createStudents(data) {
   studentArray = data.map(prepareObject);
 
-  displayList(studentArray);
+  buildList();
 }
 
 //********************************************SORTING DATA AND CORRECTING IT**********************
@@ -143,13 +143,23 @@ function displayAllStudents(student) {
   clone.querySelector("[data-field=blood]").textContent = student.blood;
   clone.querySelector("[data-field=status]").textContent = student.status;
 
-  // if (student.star === true) {
-  //   clone.querySelector("[data-field=star]").textContent = "🌟";
-  // } else {
-  //   clone.querySelector("[data-field=star]").textContent = "✰";
-  // }
+  if (student.inquisitorial === true) {
+    clone.querySelector("[data-field=inquisitorial]").textContent = "🌟";
+  } else {
+    clone.querySelector("[data-field=inquisitorial]").textContent = "✰";
+  }
 
-  // document.querySelector("[data-field=star]").textContent = "✰";
+  clone.querySelector("[data-field=inquisitorial]").addEventListener("click", clickInquisitorial);
+
+  function clickInquisitorial() {
+    if (student.inquisitorial === true) {
+      student.inquisitorial = false;
+    } else {
+      student.inquisitorial = true;
+    }
+
+    buildList();
+  }
 
   document.querySelector("#full_student_list tbody").appendChild(clone);
 }
@@ -189,8 +199,6 @@ function filterList(filteredList) {
     filteredList = studentArray.filter(filterPureBlood);
   } else if (settings.filterBy === "half_blood") {
     filteredList = studentArray.filter(filterHalfBlood);
-  } else if (settings.filterBy === "muggle") {
-    filteredList = studentArray.filter(filterMuggle);
   } else if (settings.filterBy === "prefects") {
     filteredList = studentArray.filter(filterPrefects);
   } else if (settings.filterBy === "expelled") {
@@ -250,10 +258,6 @@ function filterHalfBlood(student) {
   return student.gender === "Half blood";
 }
 
-function filterMuggle(student) {
-  return student.gender === "Muggle";
-}
-
 function filterPrefects(student) {
   return student.gender === "Prefects";
 }
@@ -269,8 +273,6 @@ function filterNonExpelled(student) {
 function filterSquad(student) {
   return student.gender === "Squad";
 }
-
-function removeFilter() {}
 
 //**********************SORT FUNCTIONS**********************
 

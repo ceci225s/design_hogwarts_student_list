@@ -15,48 +15,69 @@
   </head>
 
   <body>
-    <main>
+    <header>
       <h1>Hogwarts Student List</h1>
+      <img src="images/logo.png" alt="" />
+    </header>
 
-      <div class="button_container">
-        <div class="house">
-          <p>FILTER BY HOUSE:</p>
-          <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-          <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-          <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
-          <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-        </div>
+    <main>
+      <section>
+        <div class="section_wrapper">
+          <div class="info_box">
+            <p>GRYFFINDOR</p>
+            <p>SLYTHERIN</p>
+            <p>HUFFLEPUFF</p>
+            <p>RAVENCLAW</p>
+            <p>EXPELLED</p>
+            <p>NOT EXPELLED</p>
+          </div>
 
-        <div class="gender">
-          <p>FILTER BY GENDER:</p>
-          <button class="filter" data-action="filter" data-filter="boys">Boys</button>
-          <button class="filter" data-action="filter" data-filter="girls">Girls</button>
-        </div>
+          <div class="button_box">
+            <p>
+              FILTER BY HOUSE:
+              <button class="filter" data-action="filter" data-filter="gryffindor">
+                Gryffindor
+              </button>
+              <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+              <button class="filter" data-action="filter" data-filter="hufflepuff">
+                Hufflepuff
+              </button>
+              <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+            </p>
 
-        <div class="blood">
-          <p>FILTER BY BLOOD:</p>
-          <button class="filter" data-action="filter" data-filter="pure_blood">Pure blood</button>
-          <button class="filter" data-action="filter" data-filter="half_blood">Half blood</button>
-          <button class="filter" data-action="filter" data-filter="muggle">Muggle</button>
-        </div>
+            <p>
+              FILTER BY GENDER:
+              <button class="filter" data-action="filter" data-filter="boys">Boys</button>
+              <button class="filter" data-action="filter" data-filter="girls">Girls</button>
+            </p>
 
-        <div class="status">
-          <p>FILTER BY STUDENT STATUS:</p>
-          <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
-          <button class="filter" data-action="filter" data-filter="non_expelled">
-            Non expelled
-          </button>
-          <button class="filter" data-action="filter" data-filter="squad">Squad</button>
-          <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
-        </div>
+            <p>
+              FILTER BY BLOOD:
+              <button class="filter" data-action="filter" data-filter="pure_blood">
+                Pure blood
+              </button>
+              <button class="filter" data-action="filter" data-filter="half_blood">
+                Half blood
+              </button>
+            </p>
 
-        <div class="remove">
-          <p>REMOVE FILTER:</p>
-          <button class="filter" data-action="filter" data-filter="remove_filter">
-            Remove filter
-          </button>
+            <p>
+              FILTER BY STUDENT STATUS:
+              <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
+              <button class="filter" data-action="filter" data-filter="non_expelled">
+                Non expelled
+              </button>
+              <button class="filter" data-action="filter" data-filter="squad">Squad</button>
+              <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
+            </p>
+
+            <p>
+              REMOVE FILTER:
+              <button class="filter" data-action="filter" data-filter="all">All</button>
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
       <table id="full_student_list">
         <thead>
