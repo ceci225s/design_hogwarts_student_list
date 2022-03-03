@@ -118,3 +118,81 @@ p {
 .filter:hover {
   box-shadow: 0 0 10px #d9a443;
 }
+
+.hide {
+  visibility: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d9a54388;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog {
+  background-color: #010326;
+  padding: 4rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.close_button {
+  position: absolute;
+  right: -1rem;
+  top: -0.8rem;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  background-color: #d9a443;
+  border: none;
+}
+/* #popup {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(243, 229, 210, 0.733);
+  position: fixed;
+  top: 0;
+  padding: 2rem;
+  display: none;
+}
+
+#popup article {
+  background-color: white;
+  width: 50%;
+  height: auto;
+  text-align: center;
+  display: block;
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+#popup img {
+  width: 80%;
+  display: block;
+  height: auto;
+  margin: auto;
+}
+
+#popup button {
+  background-color: #f21905;
+  text-align: center;
+  border: none;
+  display: block;
+  margin: auto;
+  color: white;
+}
+
+#popup h3 {
+  margin-top: 2rem;
+  color: #f24c27;
+  font-size: 1.5rem;
+} */
