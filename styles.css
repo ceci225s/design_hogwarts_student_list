@@ -16,6 +16,8 @@ header {
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
+  background-color: #590219;
+  padding: 2rem;
 }
 
 main {
@@ -46,6 +48,7 @@ section {
   background-color: #0f1640;
   width: 100%;
   height: 75%;
+  place-content: center;
 }
 
 #full_student_list {
@@ -56,6 +59,17 @@ section {
   grid-row: 2;
 }
 
+#search {
+  margin-bottom: 2rem;
+  color: #d9a443;
+  font-family: "Open Sans", sans-serif;
+  border: none;
+  font-size: 0.8rem;
+  padding: 10px;
+  background-color: #0f1640;
+  width: 86%;
+}
+
 /********************** GENERAL **********************/
 
 h1 {
@@ -63,6 +77,13 @@ h1 {
   font-size: 7rem;
   color: #d9a443;
   text-shadow: 0 0 7px #f29c50;
+  margin: 1rem;
+}
+
+h2 {
+  font-family: "harryp";
+  font-size: 4rem;
+  color: #d9a443;
   margin: 1rem;
 }
 
@@ -103,6 +124,7 @@ p {
   text-align: left;
 }
 
+td button,
 .filter {
   font-family: "Open Sans", sans-serif;
   font-size: 9px;
@@ -152,47 +174,35 @@ p {
   background-color: #d9a443;
   border: none;
 }
-/* #popup {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(243, 229, 210, 0.733);
+
+.pop {
   position: fixed;
   top: 0;
-  padding: 2rem;
-  display: none;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d9a54388;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#popup article {
-  background-color: white;
-  width: 50%;
-  height: auto;
-  text-align: center;
-  display: block;
-  margin: auto;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+.dialog_pop {
+  background-color: #010326;
+  padding: 4rem;
+  border-radius: 1rem;
+  position: relative;
+  height: 40vw;
+  width: 40vw;
 }
 
-#popup img {
-  width: 80%;
-  display: block;
-  height: auto;
-  margin: auto;
-}
-
-#popup button {
-  background-color: #f21905;
-  text-align: center;
+.close_button_pop {
+  position: absolute;
+  right: -1rem;
+  top: -0.8rem;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  background-color: #d9a443;
   border: none;
-  display: block;
-  margin: auto;
-  color: white;
 }
-
-#popup h3 {
-  margin-top: 2rem;
-  color: #f24c27;
-  font-size: 1.5rem;
-} */

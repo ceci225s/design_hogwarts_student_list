@@ -18,22 +18,30 @@
     <header>
       <h1>Hogwarts Student List</h1>
       <img src="images/logo.png" alt="" />
-      <input id="search" type="text" placeholder="Search..."></input>
     </header>
 
     <main>
       <section>
-        <div class="section_wrapper">
-          <div class="info_box">
-            <p>GRYFFINDOR</p>
-            <p>SLYTHERIN</p>
-            <p>HUFFLEPUFF</p>
-            <p>RAVENCLAW</p>
-            <p>EXPELLED</p>
-            <p>NOT EXPELLED</p>
-          </div>
+
+            <div class="section_wrapper">
+              <div class="info_box">
+                <h2>Student Information</h2>
+                <p class="gryff_number"></p>
+                <p class="slyth_number"></p>
+                <p class="huff_number"></p>
+                <p class="raven_number"></p>
+                <!-- <p class="expelled_number"></p> -->
+                <p class="nonexpelled_number"></p>
+              </div>
+      
 
           <div class="button_box">
+
+            <p>
+              SEARCH: 
+              <input id="search" type="text" placeholder="Search..."></input>
+            </p>
+
             <p>
               FILTER BY HOUSE:
               <button class="filter" data-action="filter" data-filter="gryffindor">
@@ -117,7 +125,7 @@
           <td data-field="house">HOUSE</td>
           <td data-field="gender">GENDER</td>
           <td data-field="blood">BLOOD TYPE</td>
-          <td data-field="info"><button></button></td>
+          <td><button class="info">STUDENT DETAILS</button> </td>
         </tr>
       </template>
 
@@ -130,14 +138,28 @@
         </div>
       </div>
 
-      <div id="popup" class="pop hide">
+      <section id="popup" class="modal hide">
         <div class="dialog_pop">
-          <button class="close_button_pop">X</button>
-          <h1>Warning</h1>
-          <p>There can only be one prefect of each type</p>
-        </div>
+        <button class="close_button_pop">&#x2715</button>
+        <article>
+          <img src="" alt="studentImg" class="studentImage">
+          <img src="" alt="houseCrest" class="houseCrest">
+        </article>
+        <article>
+          <p class="Firstname">Firstname:</p>
+          <p class="Nickname">Nickname:</p>
+          <p class="Middlename">Middlename:</p>
+          <p class="Lastname">Lastname:</p>
+          <p class="House">House:</p>
+          <p class="Bloodstatus">Bloodstatus:</p>
+          <p class="Prefect">Prefect:</p>
+          <p class="Expelled">Expelled:</p>
+          <p class="Inquisquard">Inquisitorial squard:</p>
+          <button class="expelledBtn">Expel student here</button>
+        </article>
       </div>
-
+      </section>
+    </section>
 
       <script src="script.js"></script>
     </main>

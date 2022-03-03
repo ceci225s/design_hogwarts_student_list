@@ -35,6 +35,7 @@ function loadPage() {
   console.log("ready");
   loadJSON();
   registerButtons();
+  document.querySelector("#popup").classList.add("hide");
 }
 
 //********************************************JSON**********************
@@ -279,6 +280,7 @@ function displayAllStudents(student) {
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=blood]").textContent = student.blood;
+  clone.querySelector(".info").addEventListener("click", () => showStudentDetails(student));
 
   //********************************************DEFINE AND APPEND THE STUDENT-OBJECTS**********************
 
@@ -345,100 +347,6 @@ function displayAllStudents(student) {
   document.querySelector("#full_student_list tbody").appendChild(clone);
 }
 
-function tryToMakeExpelledStudent(selectedStudent) {
-  const allExpelledStudents = studentArray.filter((student) => student.expelled);
-
-  const numberOfExpelledStudent = allExpelledStudents.length;
-  const other = allExpelledStudents
-    .filter((student) => student.gender === selectedStudent.gender)
-    .shift();
-
-  if (other !== undefined) {
-    console.log("There can only be one expelled of each gender!");
-    removeOther(other);
-  } else if (numberOfExpelledStudent >= 2) {
-    console.log("There can only be two expelled");
-    removeAorB(student[0], student[1]);
-  } else {
-    makeExpelledStudent(selectedStudent);
-  }
-
-  function removeOther(other) {
-    document.querySelector("#remove_other").classList.remove("hide");
-    document.querySelector("#remove_other .close_button").addEventListener("click", closeDialog);
-
-    document.querySelector("#removeother");
-
-    function closeDialog() {
-      document.querySelector("#remove_other").classList.add("hide");
-    }
-
-    removeExpelledStudent(other);
-    makeExpelledStudent(selectedStudent);
-  }
-
-  function removeAorB(expelledA, expelledB) {
-    removeExpelledStudent(expelledA);
-    makeExpelledStudent(selectedStudent);
-    removeExpelledStudent(expelledB);
-    makeExpelledStudent(selectedStudent);
-  }
-
-  function removeExpelledStudent(expelledStudent) {
-    expelledStudent.expelled = false;
-  }
-
-  function makeExpelledStudent(student) {
-    student.expelled = true;
-  }
-}
-
-function tryToMakePrefectStudent(selectedStudent) {
-  const allPrefectStudents = studentArray.filter((student) => student.prefect);
-
-  const numberOfPrefectStudent = allPrefectStudents.length;
-  const other = allPrefectStudents
-    .filter((student) => student.gender === selectedStudent.gender)
-    .shift();
-
-  if (other !== undefined) {
-    console.log("There can only be one prefect of each gender!");
-    removeOther(other);
-  } else if (numberOfPrefectStudent >= 2) {
-    console.log("There can only be two prefects");
-    removeAorB(student[0], student[1]);
-  } else {
-    makePrefectStudent(selectedStudent);
-  }
-
-  function removeOther(other) {
-    document.querySelector("#remove_other").classList.remove("hide");
-    document.querySelector("#remove_other .close_button").addEventListener("click", closeDialog);
-
-    removePrefectStudent(other);
-    makePrefectStudent(selectedStudent);
-  }
-
-  function closeDialog() {
-    document.querySelector("#remove_other").classList.add("hide");
-  }
-
-  function removeAorB(prefectA, prefectB) {
-    removePrefectStudent(prefectA);
-    makePrefectStudent(selectedStudent);
-    removePrefectStudent(prefectB);
-    makePrefectStudent(selectedStudent);
-  }
-
-  function removePrefectStudent(prefectStudent) {
-    prefectStudent.prefect = false;
-  }
-
-  function makePrefectStudent(student) {
-    student.prefect = true;
-  }
-}
-
 //********************************************BUILDING A NEW LIST**********************
 
 function buildList() {
@@ -446,6 +354,7 @@ function buildList() {
   const sortedList = sortList(currentList);
 
   displayList(sortedList);
+  listInformation();
 }
 
 //********************************************FILTERING**********************
@@ -644,21 +553,111 @@ function search() {}
 
 //**********************TOGGLE FUNCTIONS**********************
 
-function makePrefect() {}
+function tryToMakePrefectStudent(selectedStudent) {
+  const allPrefectStudents = studentArray.filter((student) => student.prefect);
 
-function undoPrefect() {}
+  const numberOfPrefectStudent = allPrefectStudents.length;
+  const other = allPrefectStudents
+    .filter((student) => student.gender === selectedStudent.gender)
+    .shift();
 
-function makeSquadMember() {}
+  if (other !== undefined) {
+    console.log("There can only be one prefect of each gender!");
+    removeOther(other);
+  } else if (numberOfPrefectStudent >= 2) {
+    console.log("There can only be two prefects");
+    removeAorB(student[0], student[1]);
+  } else {
+    makePrefectStudent(selectedStudent);
+  }
+
+  function removeOther(other) {
+    document.querySelector("#remove_other").classList.remove("hide");
+    document.querySelector("#remove_other .close_button").addEventListener("click", closeDialog);
+
+    removePrefectStudent(other);
+    makePrefectStudent(selectedStudent);
+  }
+
+  function closeDialog() {
+    document.querySelector("#remove_other").classList.add("hide");
+  }
+
+  function removeAorB(prefectA, prefectB) {
+    removePrefectStudent(prefectA);
+    makePrefectStudent(selectedStudent);
+    removePrefectStudent(prefectB);
+    makePrefectStudent(selectedStudent);
+  }
+
+  function removePrefectStudent(prefectStudent) {
+    prefectStudent.prefect = false;
+  }
+
+  function makePrefectStudent(student) {
+    student.prefect = true;
+  }
+}
 
 //**********************NON-REVERSIBLE FUNCTIONS**********************
 
-function expelStudent() {}
+function tryToMakeExpelledStudent(selectedStudent) {
+  const allExpelledStudents = studentArray.filter((student) => student.expelled);
+
+  const numberOfExpelledStudent = allExpelledStudents.length;
+  const other = allExpelledStudents
+    .filter((student) => student.gender === selectedStudent.gender)
+    .shift();
+
+  if (other !== undefined) {
+    console.log("There can only be one expelled of each gender!");
+    removeOther(other);
+  } else if (numberOfExpelledStudent >= 2) {
+    console.log("There can only be two expelled");
+    removeAorB(student[0], student[1]);
+  } else {
+    makeExpelledStudent(selectedStudent);
+  }
+
+  function removeOther(other) {
+    document.querySelector("#remove_other").classList.remove("hide");
+    document.querySelector("#remove_other .close_button").addEventListener("click", closeDialog);
+
+    document.querySelector("#removeother");
+
+    function closeDialog() {
+      document.querySelector("#remove_other").classList.add("hide");
+    }
+
+    removeExpelledStudent(other);
+    makeExpelledStudent(selectedStudent);
+  }
+
+  function removeAorB(expelledA, expelledB) {
+    removeExpelledStudent(expelledA);
+    makeExpelledStudent(selectedStudent);
+    removeExpelledStudent(expelledB);
+    makeExpelledStudent(selectedStudent);
+  }
+
+  function removeExpelledStudent(expelledStudent) {
+    expelledStudent.expelled = false;
+  }
+
+  function makeExpelledStudent(student) {
+    student.expelled = true;
+  }
+}
 
 function hackSystem() {}
 
 //**********************POP-UP FUNCTIONS**********************
 
-function showStudentDetails() {}
+function showStudentDetails() {
+  console.log("click");
+  document.querySelector("#popup").classList.remove("hide");
+  document.querySelector("#popup button").addEventListener("click", closePopup);
+}
 
 function displayList(students) {
   // clear the list
@@ -670,18 +669,54 @@ function displayList(students) {
 
 //*******************************************POP-UP FUNCTIONS**********************
 
-// document.querySelector("#popup button").addEventListener("click", closePopup);
+function closePopup() {
+  console.log("Click");
+  document.querySelector("#popup").classList.add("hide");
+}
 
-// function closePopup() {
-//   document.querySelector("#popup").style.display = "none";
-// }
+function showDetails(studentDetails) {
+  console.log("detaljer");
+  document.querySelector("#popup").classList.remove("hide");
+  document.querySelector("#popup .Firstname").textContent =
+    "Firstname: " + studentDetails.firstName;
+  document.querySelector("#popup .Nickname").textContent = "Nickname: " + studentDetails.nickName;
+  document.querySelector("#popup .Middlename").textContent =
+    "Middlename: " + studentDetails.middleName;
+  document.querySelector("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
+  document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
+  document.querySelector("#popup .Bloodstatus").textContent =
+    "Bloodtype: " + studentDetails.bloodType;
+  document.querySelector("#popup .Prefect").textContent = "Prefect: " + studentDetails.prefect;
+  document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
+  document.querySelector(
+    ".studentImage"
+  ).src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
+  if (studentDetails.lastName === "Patil") {
+    document.querySelector(
+      ".studentImage"
+    ).src = `images/${studentDetails.lastName.toLowerCase()}_${studentDetails.firstName.toLowerCase()}.png`;
+  } else {
+    document.querySelector(".studentImage").src = `images/${studentDetails.lastName
+      .substring(studentDetails.lastName.lastIndexOf(""), studentDetails.lastName.indexOf("-") + 1)
+      .toLowerCase()}_${studentDetails.firstName.substring(0, 1).toLowerCase()}.png`;
+  }
+}
 
-// function showDetails(details) {
-//   const popup = document.querySelector("#popup");
-//   popup.style.display = "block";
-//   // popup.querySelector("#popup img").src = "images/" + details.picture + "-md.jpg";
-//   popup.querySelector(".firstname").textContent = details.firstName;
-//   popup.querySelector(".lastname").textContent = details.lastName;
-//   // popup.querySelector(".pris").textContent = details.pris;
-//   console.log(details);
-// }
+function listInformation() {
+  console.log("displayListInformation");
+  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT
+  document.querySelector(".gryff_number").textContent = `Gryffindor: ${
+    studentArray.filter((student) => student.house === "Gryffindor").length
+  }`;
+  document.querySelector(".slyth_number").textContent = `Slytherin: ${
+    studentArray.filter((student) => student.house === "Slytherin").length
+  }`;
+  document.querySelector(".huff_number").textContent = `Hufflepuff: ${
+    studentArray.filter((student) => student.house === "Hufflepuff").length
+  }`;
+  document.querySelector(".raven_number").textContent = `Ravenclaw: ${
+    studentArray.filter((student) => student.house === "Ravenclaw").length
+  }`;
+  // document.querySelector(".expelled_number").textContent = `Expelled: ${allExpelled.length}`;
+  document.querySelector(".nonexpelled_number").textContent = `Nonexpelled: ${studentArray.length}`;
+}
