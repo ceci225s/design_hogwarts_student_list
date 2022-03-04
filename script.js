@@ -7,6 +7,8 @@ let filteredStudents;
 let halfBloodArray = [];
 let pureBloodArray = [];
 
+const melody = document.querySelector("#backgound_sound");
+
 const Student = {
   firstName: "",
   lastName: "",
@@ -35,6 +37,8 @@ function loadPage() {
   console.log("ready");
   loadJSON();
   registerButtons();
+  melody.play();
+  melody.volume = 0.1;
   document.querySelector("#popup").classList.add("hide");
 }
 
@@ -653,30 +657,11 @@ function hackSystem() {}
 
 //**********************POP-UP FUNCTIONS**********************
 
-function showStudentDetails() {
-  console.log("click");
-  document.querySelector("#popup").classList.remove("hide");
-  document.querySelector("#popup button").addEventListener("click", closePopup);
-}
-
-function displayList(students) {
-  // clear the list
-  document.querySelector("#full_student_list tbody").innerHTML = "";
-
-  // build a new list
-  students.forEach(displayAllStudents);
-}
-
-//*******************************************POP-UP FUNCTIONS**********************
-
-function closePopup() {
-  console.log("Click");
-  document.querySelector("#popup").classList.add("hide");
-}
-
-function showDetails(studentDetails) {
+function showStudentDetails(studentDetails) {
   console.log("detaljer");
   document.querySelector("#popup").classList.remove("hide");
+  document.querySelector("#popup button").addEventListener("click", closePopup);
+  // document.querySelector("#popup").classList.remove("hide");
   document.querySelector("#popup .Firstname").textContent =
     "Firstname: " + studentDetails.firstName;
   document.querySelector("#popup .Nickname").textContent = "Nickname: " + studentDetails.nickName;
@@ -701,6 +686,21 @@ function showDetails(studentDetails) {
       .toLowerCase()}_${studentDetails.firstName.substring(0, 1).toLowerCase()}.png`;
   }
 }
+
+function closePopup() {
+  console.log("Click");
+  document.querySelector("#popup").classList.add("hide");
+}
+
+function displayList(students) {
+  // clear the list
+  document.querySelector("#full_student_list tbody").innerHTML = "";
+
+  // build a new list
+  students.forEach(displayAllStudents);
+}
+
+//*******************************************POP-UP FUNCTIONS**********************
 
 function listInformation() {
   console.log("displayListInformation");

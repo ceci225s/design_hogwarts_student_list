@@ -16,7 +16,6 @@ header {
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
-  background-color: #590219;
   padding: 2rem;
 }
 
@@ -27,7 +26,29 @@ main {
 }
 
 img {
-  width: 10%;
+  width: 12%;
+}
+
+h1 {
+  font-family: "harryp";
+  font-size: 8rem;
+  color: #d9a443;
+  text-shadow: 0 0 9px #6f7ab6;
+  margin: 1rem;
+}
+
+h2 {
+  font-family: "harryp";
+  font-size: 4rem;
+  color: #d9a443;
+  margin: 1rem;
+  text-align: center;
+}
+
+p {
+  color: #d9a443;
+  font-family: "harryp";
+  letter-spacing: 1px;
 }
 
 section {
@@ -35,6 +56,8 @@ section {
   grid-column: 2;
   margin-bottom: 2rem;
 }
+
+/********************** FIRST SECTION **********************/
 
 .section_wrapper {
   display: grid;
@@ -46,18 +69,21 @@ section {
   grid-column: 1;
   grid-row: 1/6;
   background-color: #0f1640;
+  /* background-image: url("images/paper.jpg"); */
   width: 100%;
   height: 75%;
   place-content: center;
+  border-radius: 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#full_student_list {
-  width: 100%;
-  gap: 10px;
-  text-align: center;
-  grid-column: 2;
-  grid-row: 2;
+.button_box p {
+  margin: 0;
 }
+
+/********************** SEARCH **********************/
 
 #search {
   margin-bottom: 2rem;
@@ -70,45 +96,14 @@ section {
   width: 86%;
 }
 
-/********************** GENERAL **********************/
+/********************** STUDENT LIST **********************/
 
-h1 {
-  font-family: "harryp";
-  font-size: 7rem;
-  color: #d9a443;
-  text-shadow: 0 0 7px #f29c50;
-  margin: 1rem;
-}
-
-h2 {
-  font-family: "harryp";
-  font-size: 4rem;
-  color: #d9a443;
-  margin: 1rem;
-}
-
-p {
-  color: #d9a443;
-  font-family: "harryp";
-  letter-spacing: 1px;
-}
-
-.info_box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.button_box p {
-  margin: 0;
-}
-
-/********************** TEXT **********************/
-#sorting th {
-  color: #d9a443;
-  font-family: "harryp";
-  padding: 1rem;
-  letter-spacing: 1px;
+#full_student_list {
+  width: 100%;
+  gap: 10px;
+  text-align: center;
+  grid-column: 2;
+  grid-row: 2;
 }
 
 td {
@@ -118,6 +113,15 @@ td {
   padding: 1rem;
   font-size: 0.8rem;
 }
+
+#sorting th {
+  color: #d9a443;
+  font-family: "harryp";
+  padding: 1rem;
+  letter-spacing: 1px;
+}
+
+/********************** BUTTONS **********************/
 
 .buttons,
 p {
@@ -141,9 +145,13 @@ td button,
   box-shadow: 0 0 10px #d9a443;
 }
 
+/********************** POPUP EFFECTS **********************/
+
 .hide {
   visibility: hidden;
 }
+
+/********************** POPUP WARNING **********************/
 
 .modal {
   position: fixed;
@@ -155,6 +163,10 @@ td button,
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal p {
+  font-family: "Open Sans", sans-serif;
 }
 
 .dialog {
@@ -175,7 +187,9 @@ td button,
   border: none;
 }
 
-.pop {
+/********************** POPUP INFORMATION **********************/
+
+.modal_pop {
   position: fixed;
   top: 0;
   left: 0;
@@ -187,6 +201,10 @@ td button,
   align-items: center;
 }
 
+.modal_pop p {
+  font-family: "Open Sans", sans-serif;
+}
+
 .dialog_pop {
   background-color: #010326;
   padding: 4rem;
@@ -194,6 +212,8 @@ td button,
   position: relative;
   height: 40vw;
   width: 40vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .close_button_pop {
@@ -205,4 +225,21 @@ td button,
   height: 2rem;
   background-color: #d9a443;
   border: none;
+}
+
+.image {
+  grid-column: 1;
+}
+
+.student_info {
+  grid-column: 2;
+}
+
+#popup h2 {
+  grid-column: 1/3;
+}
+
+#popup img {
+  width: 50%;
+  place-content: center;
 }
