@@ -103,9 +103,6 @@
         <thead>
           <tr id="sorting">
             <th data-action="sort" data-sort-direction="asc" data-sort="prefect">PREFECT</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="expelled">
-              EXPELLED
-            </th>
             <th data-action="sort" data-sort-direction="asc" data-sort="inquisitorial">
               INQUISITORIAL
             </th>
@@ -113,7 +110,7 @@
             <th data-action="sort" data-sort-direction="asc" data-sort="lastName">LAST NAME</th>
             <th data-action="sort" data-sort-direction="asc" data-sort="house">HOUSE</th>
             <th data-action="sort" data-sort-direction="asc" data-sort="gender">GENDER</th>
-            <th data-action="sort" data-sort-direction="asc" data-sort="blood">BLOOD TYPE</th>
+            <!-- <th data-action="sort" data-sort-direction="asc" data-sort="blood">BLOOD TYPE</th> -->
             <th data-action="sort" data-sort-direction="asc" data-sort="info">STUDENT INFO</th>
           </tr>
         </thead>
@@ -126,13 +123,12 @@
       <template id="student">
         <tr>
           <td data-field="prefect"> </td>
-          <td data-field="expelled"> </td>
           <td data-field="inquisitorial">✰</td>
           <td data-field="firstName">FULL NAME</td>
           <td data-field="lastName">LAST NAME</td>
           <td data-field="house">HOUSE</td>
           <td data-field="gender">GENDER</td>
-          <td data-field="blood">BLOOD TYPE</td>
+          <!-- <td data-field="blood">BLOOD TYPE</td> -->
           <td><button class="info">STUDENT DETAILS</button> </td>
         </tr>
       </template>
@@ -163,9 +159,8 @@
           <p class="House">House:</p>
           <p class="Bloodstatus">Bloodstatus:</p>
           <p class="Prefect">Prefect:</p>
-          <p class="Expelled">Expelled:</p>
           <p class="Inquisquard">Inquisitorial squard:</p>
-          <button class="expelledBtn">Expel student here</button>
+          <button class="expel">Expel</button>
         </article>
       </div>
       </section>
