@@ -40,8 +40,12 @@
           <div class="button_box">
 
             <p>
-              SEARCH: 
-              <input id="search" type="text" placeholder="Search..."></input>
+              SEARCH:
+              <input 
+              type="text"
+              id="search"
+              placeholder="Type name of a student"
+              >
             </p>
 
             <p>
@@ -78,9 +82,6 @@
             <p>
               FILTER BY STUDENT STATUS:
               <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
-              <button class="filter" data-action="filter" data-filter="non_expelled">
-                Non expelled
-              </button>
               <button class="filter" data-action="filter" data-filter="squad">Squad</button>
               <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
             </p>
@@ -122,8 +123,8 @@
 
       <template id="student">
         <tr>
-          <td data-field="prefect"> </td>
-          <td data-field="inquisitorial">✰</td>
+          <td class="cursor" data-field="prefect"> </td>
+          <td class="cursor" data-field="inquisitorial">✰</td>
           <td data-field="firstName">FULL NAME</td>
           <td data-field="lastName">LAST NAME</td>
           <td data-field="house">HOUSE</td>
@@ -135,31 +136,43 @@
 
 
 
-      <section id="remove_other" class="modal hide">
-        <div class="dialog">
-          <button class="close_button">&#x2715</button>
+      <section id="popup_inquisitorial" class="modal_pop_inquisitorial hide">
+        <div class="dialog_inquisitorial">
+          <button class="close_button_inquisitorial">&#x2715</button>
           <h2>WARNING!</h2>
-          <p>There can only be one prefect of each type</p>
+          <p>Only members of Slytherin or pure blooded students can become a member of the Inquisitorial Squad</p>
         </div>
       </section>
 
-      <section id="popup" class="modal_pop hide">
-        <div class="dialog_pop">
-        <button class="close_button_pop">&#x2715</button>
+      <div id="popup_prefect" class="modal_pop_prefect hide">
+        <div class="dialog_prefect">
+          <button class="close_button_prefect">x</button>
+          <h2>WARNING!</h2>
+          <p>There can not be anymore than two prefects from each house<br>
+          Do you wish to remove one of the existing prefects?</p>
+          <div class="sidebyside"></div>
+          <button id="removea">Remove <span data-field="prefectA">A</span></button>
+          <button id="removeb">Remove <span data-field="prefectB">B</span></button>
+        </div>
+      </div>
+
+      <section id="popup_student" class="modal_pop_student hide">
+        <div class="dialog_student">
+        <button class="close_button_student">&#x2715</button>
         <h2>Student Information</h2>
         <article class="image">
           <img src="" alt="studentImg" class="studentImage">
           <img src="" alt="houseCrest" class="houseCrest">
         </article>
         <article class="student_info">
-          <p class="Firstname">Firstname:</p>
-          <p class="Nickname">Nickname:</p>
-          <p class="Middlename">Middlename:</p>
-          <p class="Lastname">Lastname:</p>
-          <p class="House">House:</p>
-          <p class="Bloodstatus">Bloodstatus:</p>
-          <p class="Prefect">Prefect:</p>
-          <p class="Inquisquard">Inquisitorial squard:</p>
+          <p class="firstname">Firstname:</p>
+          <p class="nickname">Nickname:</p>
+          <p class="middlename">Middlename:</p>
+          <p class="lastname">Lastname:</p>
+          <p class="house">House:</p>
+          <p class="bloodstatus">Bloodstatus:</p>
+          <p class="prefect">Prefect:</p>
+          <p class="inquisquard">Inquisitorial squard:</p>
           <button class="expel">Expel</button>
         </article>
       </div>

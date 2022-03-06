@@ -57,6 +57,12 @@ section {
   margin-bottom: 2rem;
 }
 
+button,
+th,
+.cursor {
+  cursor: pointer;
+}
+
 /********************** FIRST SECTION **********************/
 
 .section_wrapper {
@@ -128,8 +134,10 @@ p {
   text-align: left;
 }
 
-td button,
-.filter {
+.info,
+.filter,
+#removea,
+#removeb {
   font-family: "Open Sans", sans-serif;
   font-size: 9px;
   height: 4rem;
@@ -141,7 +149,10 @@ td button,
   margin: 10px;
 }
 
-.filter:hover {
+.filter:hover,
+.info:hover,
+#removea:hover,
+#removeb:hover {
   box-shadow: 0 0 10px #d9a443;
 }
 
@@ -153,7 +164,7 @@ td button,
 
 /********************** POPUP WARNING **********************/
 
-.modal {
+.modal_pop_prefect {
   position: fixed;
   top: 0;
   left: 0;
@@ -165,18 +176,56 @@ td button,
   align-items: center;
 }
 
-.modal p {
+.modal_pop_prefect p {
   font-family: "Open Sans", sans-serif;
 }
 
-.dialog {
+.dialog_prefect {
   background-color: #010326;
   padding: 4rem;
   border-radius: 1rem;
   position: relative;
+  width: 30vw;
+  text-align: center;
 }
 
-.close_button {
+.close_button_prefect {
+  position: absolute;
+  right: -1rem;
+  top: -0.8rem;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  background-color: #d9a443;
+  border: none;
+}
+
+.modal_pop_inquisitorial {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d9a54388;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_pop_inquisitorial p {
+  font-family: "Open Sans", sans-serif;
+}
+
+.dialog_inquisitorial {
+  background-color: #010326;
+  padding: 4rem;
+  border-radius: 1rem;
+  position: relative;
+  width: 30vw;
+  text-align: center;
+}
+
+.close_button_inquisitorial {
   position: absolute;
   right: -1rem;
   top: -0.8rem;
@@ -189,7 +238,7 @@ td button,
 
 /********************** POPUP INFORMATION **********************/
 
-.modal_pop {
+.modal_pop_student {
   position: fixed;
   top: 0;
   left: 0;
@@ -201,11 +250,11 @@ td button,
   align-items: center;
 }
 
-.modal_pop p {
+.modal_pop_student p {
   font-family: "Open Sans", sans-serif;
 }
 
-.dialog_pop {
+.dialog_student {
   background-color: #010326;
   padding: 4rem;
   border-radius: 1rem;
@@ -216,7 +265,7 @@ td button,
   grid-template-columns: 1fr 1fr;
 }
 
-.close_button_pop {
+.close_button_student {
   position: absolute;
   right: -1rem;
   top: -0.8rem;
@@ -235,11 +284,11 @@ td button,
   grid-column: 2;
 }
 
-#popup h2 {
+#popup_student h2 {
   grid-column: 1/3;
 }
 
-#popup img {
+#popup_student img {
   width: 67%;
   place-content: center;
 }
