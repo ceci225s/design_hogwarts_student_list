@@ -32,8 +32,8 @@
                 <p class="slyth_number"></p>
                 <p class="huff_number"></p>
                 <p class="raven_number"></p>
-                <!-- <p class="expelled_number"></p> -->
-                <p class="nonexpelled_number"></p>
+                <p class="expelled_number"></p>
+                <p class="current_number"></p>
               </div>
       
 
@@ -111,7 +111,6 @@
             <th data-action="sort" data-sort-direction="asc" data-sort="lastName">LAST NAME</th>
             <th data-action="sort" data-sort-direction="asc" data-sort="house">HOUSE</th>
             <th data-action="sort" data-sort-direction="asc" data-sort="gender">GENDER</th>
-            <!-- <th data-action="sort" data-sort-direction="asc" data-sort="blood">BLOOD TYPE</th> -->
             <th data-action="sort" data-sort-direction="asc" data-sort="info">STUDENT INFO</th>
           </tr>
         </thead>
@@ -123,13 +122,12 @@
 
       <template id="student">
         <tr>
-          <td class="cursor" data-field="prefect"> </td>
-          <td class="cursor" data-field="inquisitorial">✰</td>
+          <td class="cursor" data-field="prefect">✰</td>
+          <td class="cursor" data-field="inquisitorial">🎖</td>
           <td data-field="firstName">FULL NAME</td>
           <td data-field="lastName">LAST NAME</td>
           <td data-field="house">HOUSE</td>
           <td data-field="gender">GENDER</td>
-          <!-- <td data-field="blood">BLOOD TYPE</td> -->
           <td><button class="info">STUDENT DETAILS</button> </td>
         </tr>
       </template>
@@ -140,7 +138,7 @@
         <div class="dialog_inquisitorial">
           <button class="close_button_inquisitorial">&#x2715</button>
           <h2>WARNING!</h2>
-          <p>Only members of Slytherin or pure blooded students can become a member of the Inquisitorial Squad</p>
+          <p>Only members of Slytherin or pure blooded students can become a member of the Inquisitorial Squad.</p>
         </div>
       </section>
 
@@ -148,32 +146,33 @@
         <div class="dialog_prefect">
           <button class="close_button_prefect">x</button>
           <h2>WARNING!</h2>
-          <p>There can not be anymore than two prefects from each house<br>
-          Do you wish to remove one of the existing prefects?</p>
+          <p>Only two students from each house can be selected as a prefect.</p>
+          <p> Which student do you want to deselect as prefect?</p>
           <div class="sidebyside"></div>
-          <button id="removea">Remove <span data-field="prefectA">A</span></button>
-          <button id="removeb">Remove <span data-field="prefectB">B</span></button>
+          <button id="removea">Deselect <span data-field="prefectA">A</span></button>
+          <button id="removeb">Deselect <span data-field="prefectB">B</span></button>
         </div>
       </div>
 
       <section id="popup_student" class="modal_pop_student hide">
         <div class="dialog_student">
         <button class="close_button_student">&#x2715</button>
+        <button class="expel">EXPEL</button>
         <h2>Student Information</h2>
         <article class="image">
           <img src="" alt="studentImg" class="studentImage">
           <img src="" alt="houseCrest" class="houseCrest">
         </article>
         <article class="student_info">
-          <p class="firstname">Firstname:</p>
-          <p class="nickname">Nickname:</p>
-          <p class="middlename">Middlename:</p>
-          <p class="lastname">Lastname:</p>
-          <p class="house">House:</p>
-          <p class="bloodstatus">Bloodstatus:</p>
-          <p class="prefect">Prefect:</p>
-          <p class="inquisquard">Inquisitorial squard:</p>
-          <button class="expel">Expel</button>
+          <p class="firstname"></p>
+          <p class="nickname"></p>
+          <p class="middlename"></p>
+          <p class="lastname"></p>
+          <p class="house"></p>
+          <p class="bloodstatus"></p>
+          <p class="prefect"></p>
+          <p class="expelled"></p>
+          <p class="inquisitorial"></p>
         </article>
       </div>
       </section>
