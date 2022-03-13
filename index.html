@@ -82,13 +82,7 @@
             <p>
               FILTER BY STUDENT STATUS:
               <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
-              <button class="filter" data-action="filter" data-filter="squad">Squad</button>
-              <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
-            </p>
-
-            <p>
-              REMOVE FILTER:
-              <button class="filter" data-action="filter" data-filter="all">All</button>
+              <button class="filter" data-action="filter" data-filter="all">Non expelled</button>
             </p>
           </div>
 
@@ -122,8 +116,8 @@
 
       <template id="student">
         <tr>
-          <td class="cursor" data-field="prefect">✰</td>
-          <td class="cursor" data-field="inquisitorial">🎖</td>
+          <td class="cursor" data-field="prefect">◯</td>
+          <td class="cursor" data-field="inquisitorial">◯</td>
           <td data-field="firstName">FULL NAME</td>
           <td data-field="lastName">LAST NAME</td>
           <td data-field="house">HOUSE</td>

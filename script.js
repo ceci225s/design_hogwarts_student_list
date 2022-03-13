@@ -37,7 +37,6 @@ window.addEventListener("DOMContentLoaded", loadPage);
 function loadPage() {
   console.log("ready");
   loadStudents();
-  loadBlood();
   registerButtons();
   melody.play();
   melody.volume = 0.1;
@@ -46,24 +45,24 @@ function loadPage() {
   document.querySelector("#popup_prefect").classList.add("hide");
 }
 
-//********************************************LOADING STUDENTS JSON**********************
+//********************************************LOADING JSON - STUDENTS AND FAMILIES**********************
 
 async function loadStudents() {
   const urlStudents = "https://petlatkea.dk/2021/hogwarts/students.json";
   const dataStudents = await fetch(urlStudents);
   const student = await dataStudents.json();
 
+  await loadBlood();
+
+  async function loadBlood() {
+    const urlBlood = "https://petlatkea.dk/2021/hogwarts/families.json";
+    const dataBlood = await fetch(urlBlood);
+    const bloodtype = await dataBlood.json();
+    studentArrayBlood = bloodtype;
+  }
+
   // when loaded, prepare data objects
   createStudents(student);
-}
-
-//********************************************LOADING FAMILIES JSON**********************
-
-async function loadBlood() {
-  const urlBlood = "https://petlatkea.dk/2021/hogwarts/families.json";
-  const dataBlood = await fetch(urlBlood);
-  const bloodtype = await dataBlood.json();
-  studentArrayBlood = bloodtype;
 }
 
 //********************************************REGISTER BUTTONS**********************
@@ -213,9 +212,9 @@ function displayAllStudents(student) {
   //********************************************INQUISITORIAL STUDENTS**********************
 
   if (student.inquisitorial === true) {
-    clone.querySelector("[data-field=inquisitorial]").textContent = "🌟";
-  } else {
     clone.querySelector("[data-field=inquisitorial]").textContent = "🎖";
+  } else {
+    clone.querySelector("[data-field=inquisitorial]").textContent = "◯";
   }
 
   clone.querySelector("[data-field=inquisitorial]").addEventListener("click", clickInquisitorial);
@@ -238,7 +237,7 @@ function displayAllStudents(student) {
   if (student.prefect === true) {
     clone.querySelector("[data-field=prefect]").textContent = "🌟";
   } else {
-    clone.querySelector("[data-field=prefect]").textContent = "☆";
+    clone.querySelector("[data-field=prefect]").textContent = "◯";
   }
 
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
@@ -298,9 +297,7 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "prefects") {
     filteredList = prefectStudent.filter(filterPrefects);
   } else if (settings.filterBy === "expelled") {
-    filteredList = expelledStudent.filter(filterExpell);
-  } else if (settings.filterBy === "squad") {
-    filteredList = expelledStudent.filter(filterSquad);
+    filteredList = expelledStudent;
   }
 
   return filteredList;
@@ -356,18 +353,6 @@ function filterMuggle(student) {
   return student.bloodType === "muggle";
 }
 
-function filterPrefects(student) {
-  return student.prefect === "Prefects";
-}
-
-function filterSquad(student) {
-  return student.gender === "Squad";
-}
-
-function filterExpell(student) {
-  return student.expelled === "Expelled";
-}
-
 //**********************MAKINF THE SORTING**********************
 
 function selectSort(event) {
@@ -400,16 +385,6 @@ function sortList(sortedList) {
   } else {
     settings.direction = 1;
   }
-
-  // if (sortBy === "firstName") {
-  // sortedList = studentArray.sort(sortFirstName);
-  // } else if (sortBy === "lastName") {
-  //   sortedList = studentArray.sort(sortLastName);
-  // } else if (sortBy === "house") {
-  //   sortedList = studentArray.sort(sortHouse);
-  // } else if (sortBy === "gender") {
-  //   sortedList = studentArray.sort(sortGender);
-  // }
 
   sortedList = sortedList.sort(sortByProperty);
 
@@ -534,11 +509,12 @@ function studentPopup(studentDetails) {
     buildList();
     closeStudentPopup();
   }
-}
 
-function closeStudentPopup() {
-  console.log("Click");
-  document.querySelector("#popup_student").classList.add("hide");
+  function closeStudentPopup() {
+    console.log("Click");
+    document.querySelector("#popup_student").classList.add("hide");
+    document.querySelector(".expel").removeEventListener("click", expelStudent);
+  }
 }
 
 //**********************POPUP PREFECT**********************
@@ -574,10 +550,10 @@ function listInformation() {
   }`;
   document.querySelector(
     ".current_number"
-  ).textContent = `NUMBER OF CURRENTLY DISPLAYED STUDENTS ${studentArray.length}`;
+  ).textContent = `NON EXPELLED STUDENTS: ${studentArray.length}`;
   document.querySelector(
     ".expelled_number"
-  ).textContent = `NUMBER OF EXPELLED STUDENTS: ${expelledStudent.length}`;
+  ).textContent = `EXPELLED STUDENTS: ${expelledStudent.length}`;
 }
 
 //**********************NON-REVERSIBLE FUNCTIONS**********************
@@ -590,4 +566,26 @@ function displayList(students) {
   students.forEach(displayAllStudents);
 }
 
-function hackSystem() {}
+//**********************HACKING THE SYSTEM BY THE CONSOLE**********************
+
+function hackTheSystem() {
+  console.log("hacking");
+  addCecilia();
+}
+
+function addCecilia() {
+  let me = Object.create(studentArray);
+  me.firstName = "Cecilia";
+  me.lastName = "Saxton";
+  me.middleName = "Elisabeth";
+  me.nickName = "Sax";
+  me.house = "Gryffindor";
+  me.gender = "Girl";
+
+  studentArray.push(me);
+  buildList();
+}
+
+function expelCecilia() {
+  alert("You want to expell me?! Too bad, that is not possible ;)");
+}
